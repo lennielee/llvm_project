@@ -74,7 +74,10 @@ int main(){
     
     irBuilder.CreateRet(irBuilder.getInt32(0));
 
+    verifyFunction(*mainFunc, &errs());
 
+    verifyModule(m, &errs());
+    
     m.print(outs(), nullptr);
 
     return 0;
