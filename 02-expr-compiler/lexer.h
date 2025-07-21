@@ -21,13 +21,16 @@ class Token{
         int row, col;
         TokenType tokenType;
         int value;
-
+        llvm::StringRef content;
         Token(){
             row = col = -1;
             tokenType = TokenType::unknown;
             value = -1;
         }
+        void Dump(){
 
+            llvm::outs() << "{ " << content << ", row = " << row << ", col = " << col << "}\n";
+        }
 };
 
 class Lexer{
