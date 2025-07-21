@@ -2,6 +2,8 @@
 #include "iostream"
 #include "llvm/Support/MemoryBuffer.h"
 #include "llvm/Support/ErrorOr.h"
+#include "parser.h"
+#include "printVisitor.h"
 
 int main(int argc, char** argv ){
     if(argc < 2){
@@ -30,5 +32,11 @@ int main(int argc, char** argv ){
             break;
         }
     }
+
+    Lexer lex_1(memBuf->getBuffer());
+    Parser parser(lex_1);
+    auto program = parser.ParseProgram();
+    PrintVisitor printVisitor(program);
+
     return 0;
 }
