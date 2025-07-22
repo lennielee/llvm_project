@@ -18,4 +18,4 @@ include_directories(${LLVM_INCLUDE_DIRS})
 link_directories(${LLVM_LIBRARY_DIRS})
 add_definitions(${LLVM_DEFINITIONS})
 
-add_llvm_executable(${PROJECT_NAME} main.cc lexer.cc parser.cc printVisitor.cc)
+add_llvm_executable(${PROJECT_NAME} main.cc lexer.cc parser.cc printVisitor.cc codegen.cc)
