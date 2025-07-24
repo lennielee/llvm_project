@@ -23,20 +23,22 @@ int main(int argc, char *argv[]) {
     std::unique_ptr<llvm::MemoryBuffer> memBuf = std::move(*buf);
     Lexer lex(memBuf->getBuffer());
 
-    // Token tok;
-    // while (true) {
-    //     lex.NextToken(tok);
-    //     if (tok.tokenType != TokenType::eof)
-    //         tok.Dump();
-    //     else {
-    //         break;
-    //     }
-    // }
+     Token tok;
+     while (true) {
+         lex.NextToken(tok);
+         if (tok.tokenType != TokenType::eof)
+             tok.Dump();
+         else {
+             break;
+         }
+     }
+
+    Lexer lex_1(memBuf->getBuffer());
     Sema sema;
-    Parser parser(lex, sema);
+    Parser parser(lex_1, sema);
     auto program = parser.ParseProgram();
 
-    // PrintVisitor printVisitor(program);
+    PrintVisitor printVisitor(program);
     CodeGen codegen(program);
     return 0;
 }

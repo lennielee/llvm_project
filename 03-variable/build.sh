@@ -15,4 +15,4 @@ cd "$BUILD_DIR"
 
 # 配置 & 编译
 cmake .. -G Ninja -DCMAKE_BUILD_TYPE=Release
-cmake --build .
+cmake --build . --parallel

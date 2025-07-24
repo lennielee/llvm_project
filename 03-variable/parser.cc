@@ -1,4 +1,5 @@
 #include "parser.h"
+
 /**
 prog : (expr? ";")*
 expr : term (("+" | "-") term)* ;
@@ -39,9 +40,15 @@ std::vector<std::shared_ptr<AstNode>> Parser::ParseDecl() {
     
     int i = 0;
     while (tok.tokenType != TokenType::semi) {
+
         if (i++ > 0) {
-            assert(Consume(TokenType::comma));
+
+            // -DCMAKE_BUILD_TYPE=Debug
+            //assert(Consume(TokenType::comma));
+            // -DCMAKE_BUILD_TYPE=Release
+            Consume(TokenType::comma); 
         }
+
         auto variableName = tok.content;
         /// int a = 3; => int a; a = 3;
         ///变量声明的节点
@@ -125,6 +132,7 @@ std::shared_ptr<AstNode> Parser::ParseFactor() {
 }
 
 bool Parser::Expect(TokenType tokenType) {
+    
     if (tok.tokenType == tokenType) {
         return true;
     }
@@ -134,6 +142,7 @@ bool Parser::Expect(TokenType tokenType) {
 bool Parser::Consume(TokenType tokenType) {
     if (Expect(tokenType)) {
         Advance();
+        
         return true;
     }
     return false;
