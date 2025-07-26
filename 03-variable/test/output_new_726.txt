@@ -1,0 +1,51 @@
+{ int, row = 1, col = 1}
+{ a, row = 1, col = 5}
+{ =, row = 1, col = 7}
+{ 3, row = 1, col = 9}
+{ ,, row = 1, col = 11}
+{ b, row = 1, col = 13}
+{ =, row = 1, col = 15}
+{ 4, row = 1, col = 16}
+{ ;, row = 1, col = 18}
+{ a, row = 2, col = 1}
+{ =, row = 2, col = 3}
+{ 1, row = 2, col = 5}
+{ ;, row = 2, col = 6}
+{ a, row = 3, col = 1}
+{ +, row = 3, col = 3}
+{ b, row = 3, col = 5}
+{ *, row = 3, col = 6}
+{ 4, row = 3, col = 7}
+{ +, row = 3, col = 9}
+{ 5, row = 3, col = 10}
+{ ;, row = 3, col = 11}
+int a;
+a = 3
+int b;
+b = 4
+a
+4
+1
+a + b * 4 + 5
+; ModuleID = 'expr'
+source_filename = "expr"
+
+@0 = private unnamed_addr constant [14 x i8] c"expr val: %d\0A\00", align 1
+
+declare i32 @printf(ptr, ...)
+
+define i32 @main() {
+entry:
+  %a = alloca i32, align 4
+  store i32 3, ptr %a, align 4
+  %b = alloca i32, align 4
+  store i32 4, ptr %b, align 4
+  %a1 = load i32, ptr %a, align 4
+  %a2 = load i32, ptr %a, align 4
+  %b3 = load i32, ptr %b, align 4
+  %0 = mul nsw i32 %b3, 4
+  %1 = add nsw i32 %a2, %0
+  %2 = add nsw i32 %1, 5
+  %3 = call i32 (ptr, ...) @printf(ptr @0, i32 %2)
+  ret i32 0
+}
